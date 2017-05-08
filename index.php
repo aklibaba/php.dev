@@ -1,6 +1,10 @@
 <?php
 
 require_once 'inc/autoload.php';
+require_once 'inc/Database.php';
+
+$database = new Database();
+
 
 try {
 
@@ -13,4 +17,3 @@ echo $cool_duck->describe();
 echo $cool_duck->make_noise();
 $cool_duck->iterateProps();
 
-defined('YII_ALPHA') or define('YII_ALPHA', strpos($_SERVER['HTTP_HOST'], '.dev') !== false);
