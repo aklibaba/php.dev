@@ -1,5 +1,6 @@
 <?php
 
+
 class Database {
 	private $host = 'localhost';
 	private $user = 'root';
@@ -16,7 +17,6 @@ class Database {
 	public function __construct() {
 		//Set DSN
 		$dsn = "mysql:host={$this->host};dbname={$this->dbname}";
-		echo $dsn;
 
 		//Set Options
 		$options = [
@@ -29,7 +29,7 @@ class Database {
 			$this->dbh = new PDO( $dsn, $this->user, $this->password, $options );
 		} catch ( PDOException $e ) {
 			$this->error = $e->getMessage();
-			echo $this->error;
+//			echo $this->error;
 		}
 	}
 
@@ -54,6 +54,15 @@ class Database {
 			}
 		}
 
-		$this->statement->bindValue()
+		$this->statement->bindValue($param, $value, $type);
+	}
+
+	public function execute() {
+		return $this->statement->execute();
+	}
+
+	public function result_set() {
+		$this->execute();
+		return $this->statement->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
